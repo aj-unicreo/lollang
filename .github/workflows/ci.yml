@@ -1,0 +1,37 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: Test on Node ${{ matrix.node }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node: ["18", "20", "22"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm run build
+      - run: npm test
+      - name: Smoke test CLI
+        run: |
+          node dist/cli.js --version
+          echo 'xd("hello from " + (1 + 2));' | node dist/cli.js unlulzcate
+          echo 'console.log("hi");' | node dist/cli.js oblulzcate
+          node dist/cli.js run examples/hello.lol
+          node dist/cli.js run examples/fizzbuzz.lol

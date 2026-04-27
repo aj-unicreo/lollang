@@ -1,0 +1,14 @@
+node_modules/
+dist/
+coverage/
+*.log
+.DS_Store
+.env
+.env.local
+.env.*.local
+*.tgz
+.vscode/
+.idea/
+*.swp
+.lollang_tmp_*
+__lollang_tmp__*
