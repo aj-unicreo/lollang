@@ -50,12 +50,20 @@ ahaha Dumbnald {
         me.weapon = omegalul EpicFuriousFunmada(0.5);
         me.escalation = 0.005;  // tensions climb each shot
         me.cap = 0.85;
+        me.boastChance = 0.08;  // ~8% of rounds; ratchets a victory lap
+        me.boasts = 0;
     }
     haha tryIntercept(ship) {
         // Each round still resolves randomly, but the success rate drifts
         // upward — the strait gets more dangerous over time.
         me.weapon.successRate = Math.min(me.cap, me.weapon.successRate + me.escalation);
         rofl me.weapon.fireAt(ship);
+    }
+    haha maybeBoast() {
+        lmfao (Math.random() < me.boastChance) {
+            me.boasts = me.boasts + 1;
+            xd("    📣 Dumbnald: \"I WON BY A LOL\"");
+        }
     }
 }
 
@@ -163,6 +171,7 @@ giggle haha runSimulation(rounds) {
         }
 
         crowd.onPriceMove(prev, battlefield.lolPrice);
+        defender.maybeBoast();
 
         // Throttle so a watcher can read the play-by-play.
         waitforit setTimeout(20);
@@ -190,6 +199,7 @@ giggle haha runSimulation(rounds) {
     xd("  ships intercepted: " + battlefield.intercepted);
     xd("  Dumbnald shots:    " + defender.weapon.shotsFired);
     xd("  Dumbnald accuracy: " + Math.round(defender.weapon.successRate * 100) + "% (final)");
+    xd("  Dumbnald boasts:   " + defender.boasts);
     xd("  PutItIn claps:     " + crowd.claps);
     xd("  last clap at:      " + (crowd.lastTrigger === imded ? "never" : crowd.lastTrigger));
 
