@@ -10,5 +10,4 @@ coverage/
 .vscode/
 .idea/
 *.swp
-.lollang_tmp_*
-__lollang_tmp__*
+.__lollang_*__.mjs

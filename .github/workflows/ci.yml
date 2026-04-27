@@ -35,3 +35,6 @@ jobs:
           echo 'console.log("hi");' | node dist/cli.js oblulzcate
           node dist/cli.js run examples/hello.lol
           node dist/cli.js run examples/fizzbuzz.lol
+          node dist/cli.js run examples/factorial.lol
+          node dist/cli.js run examples/cat.lol
+          node dist/cli.js run examples/straight-of-harm-us.lol
